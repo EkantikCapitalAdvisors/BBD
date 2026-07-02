@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#10182B" />
+<title>BBD Calculator Suite — falsifiability instruments · Ekantik Capital Advisors</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="bbd.css" />
+
+<style>
+  /* page chrome (not part of the portable foundation) */
+  body { margin: 0; background: #10182B; }
+  .bbd-doc-head { padding: clamp(3rem,7vw,5rem) 0 1.5rem; }
+  .bbd-doc-head .bbd-note {
+    background: #131F38; border: 1px solid rgba(233,231,226,.14);
+    border-left: 3px solid #C8A951; border-radius: 8px; padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem; max-width: 78ch; color: #9A9485; font-size: .9rem; line-height: 1.6;
+  }
+  .bbd-doc-head .bbd-note strong { color: #C8A951; }
+  .bbd-cta { text-align: center; padding: clamp(3rem,7vw,5rem) 0; border-top: 1px solid rgba(200,169,81,.30); }
+  .bbd-cta a {
+    display: inline-flex; align-items: center; gap: .5rem; font-family: 'DM Sans', sans-serif;
+    font-weight: 600; background: #C8A951; color: #10182B; text-decoration: none;
+    padding: .9rem 1.75rem; border-radius: 8px; margin-top: 1rem;
+  }
+</style>
+</head>
+<body>
+<div class="bbd-suite">
+
+  <header class="bbd-doc-head">
+    <div class="bbd-wrap">
+      <span class="bbd-kicker"><span class="bbd-kicker__glyph">◆</span> Ekantik Capital · BBD</span>
+      <h1 class="bbd-h2" style="max-width:22ch">The product is the marketing.</h1>
+      <p class="bbd-question">These are <strong>falsifiability instruments, not sales tools</strong>. You supply the assumptions; we supply only the math and the structure. Every output is reproducible by your own CPA on a napkin — and every figure on this page is computed live from one shared engine, never typed in.</p>
+      <div class="bbd-note">
+        <strong>DRAFT.</strong> All constants are placeholders pending §9 sign-off and securities/insurance-counsel review. Nothing here is an offer, a projection, or advice. Numbers render in mono type as a signal that they were <em>computed, not asserted</em>.
+      </div>
+    </div>
+  </header>
+
+  <!-- Narrative order (spec §5): Leak → Wedge → Ladder → Breakeven → Curve -->
+  <main id="bbd-calcs"></main>
+
+  <section class="bbd-cta">
+    <div class="bbd-wrap">
+      <span class="bbd-kicker" style="justify-content:center"><span class="bbd-kicker__glyph">◆</span> The kill switch is shown live</span>
+      <h2 class="bbd-h2" style="max-width:24ch;margin-inline:auto">The full simulator — including how it fails — is walked on the call.</h2>
+      <p class="bbd-question" style="margin-inline:auto">The master simulator (CALC-04) shows its own kill condition: the exact input at which the guardrails fire. We show you that before you sign anything.</p>
+      <a href="https://calendly.com/hd-ekantikcapital/30min" target="_blank" rel="noopener">Book a readiness call →</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- one source of truth: constants → engine → format → motifs → compliance → widgets -->
+<script>window.BBD_CONSTANTS = null;</script>
+<script>
+  // Load constants synchronously-ish, then boot. (Static file; fetch is fine here —
+  // the ENGINE itself never fetches; this is page wiring only.)
+  fetch("bbd-constants.json").then(function (r) { return r.json(); }).then(function (C) {
+    window.BBD_CONSTANTS = C;
+    var s = document.createElement("script"); s.src = "boot.js"; document.body.appendChild(s);
+  });
+</script>
+</body>
+</html>
