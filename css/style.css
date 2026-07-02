@@ -1,10 +1,11 @@
 /* ===================================
    EKANTIK CAPITAL ADVISORS
    Guardrailed Buy, Borrow & Die
-   Brand system (master build spec §9):
-   Navy #1B2A4A + Gold #C8A951 on Ivory #FAF8F5.
-   Slate #64748B supporting text. Signal Red #DC2626 = urgency only.
-   Display: Cormorant Garamond · Body: DM Sans · Mono: JetBrains Mono
+   Brand foundation (accelerator.ekantikcapital.com):
+   Deep-navy institutional canvas · disciplined gold accent.
+   Navy #10182B/#131F38/#1B2A4A · Gold #C8A951 · Ivory #FAF8F5 relief.
+   Display: Playfair Display · Body: DM Sans · Data: DM Mono.
+   Gold discipline: emphasis / primary CTA / key numerals only.
    =================================== */
 
 /* CSS Reset & Base Styles */
@@ -15,35 +16,41 @@
 }
 
 :root {
-    /* Brand navy family (used for text, dark accents, text-on-gold) */
-    --navy-dark: #141F38;
-    --navy-primary: #1B2A4A;
-    --navy-light: #2C4068;
-    /* Signature gold */
+    /* Navy scale — the canvas */
+    --navy-dark: #10182B;      /* navy-950: deepest background */
+    --navy-primary: #131F38;   /* navy-900: raised panels/cards on dark */
+    --navy-light: #1B2A4A;     /* navy-800: brand navy, borders, headers */
+    /* Signature gold — accent only */
     --gold-primary: #C8A951;
-    --gold-hover: #B6963F;
+    --gold-hover: #B08F3C;
     --gold-light: #D9C179;
-    --gold-muted: #B6963F;
-    /* Text on ivory */
-    --text-light: #1B2A4A;   /* primary body text (navy) */
-    --text-muted: #64748B;   /* slate supporting text */
-    --text-dark: #1B2A4A;
-    /* Functional colours, tuned for contrast on light surfaces */
-    --green-safe: #0B7A5E;
-    --green-success: #0B7A5E;
-    --amber-caution: #B7791F;
-    --red-danger: #DC2626;   /* brand signal red */
-    /* Surfaces */
+    --gold-600: #B08F3C;
+    /* Text on the dark canvas */
+    --text-light: #E9E7E2;                     /* body on navy (warm off-white) */
+    --text-muted: rgba(233, 231, 226, 0.62);   /* muted / captions */
+    --text-dark: #1B2A4A;                       /* text on light relief sections */
+    /* Semantic layer */
+    --green-safe: #34C759;     /* live / positive */
+    --green-success: #34C759;
+    --color-data: #0D9488;     /* teal — neutral data */
+    --amber-caution: #D9A441;
+    --red-danger: #DC2626;     /* kill / gate / danger only */
+    /* Surfaces & lines */
     --ivory: #FAF8F5;
-    --body-bg: #FAF8F5;
-    --border-color: rgba(27, 42, 74, 0.14);
-    --card-bg: #ffffff;
-    --card-hover: #ffffff;
+    --body-bg: #10182B;
+    --border-color: rgba(233, 231, 226, 0.14);
+    --hairline-gold: rgba(200, 169, 81, 0.30);
+    --card-bg: rgba(19, 31, 56, 0.72);
+    --card-hover: rgba(27, 42, 74, 0.85);
+    /* Type roles */
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 body {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--ivory);
+    font-family: var(--font-body);
+    background: var(--navy-dark);
     color: var(--text-light);
     line-height: 1.6;
     overflow-x: hidden;
@@ -58,9 +65,9 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        linear-gradient(rgba(27, 42, 74, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(27, 42, 74, 0.035) 1px, transparent 1px);
+    background-image: 
+        linear-gradient(rgba(200, 169, 81, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 169, 81, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
@@ -83,7 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 3.5rem;
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-family: var(--font-display);
 }
 
 h2 {
@@ -148,7 +155,7 @@ h3 {
 .sticky-nav {
     position: sticky;
     top: 0;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(16, 24, 43, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
@@ -464,7 +471,7 @@ h3 {
 
 .problem-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(19, 31, 56, 0.5) 100%);
 }
 
 .problem-grid {
@@ -585,7 +592,7 @@ h3 {
 .step-specs {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     border-radius: 6px;
     border-left: 3px solid var(--gold-primary);
 }
@@ -618,7 +625,7 @@ h3 {
 }
 
 .gauge-preview {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     padding: 1rem;
     border-radius: 6px;
     text-align: center;
@@ -632,7 +639,7 @@ h3 {
 
 .gauge-bar {
     height: 8px;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 0.5rem;
@@ -664,7 +671,7 @@ h3 {
 .borrow-triggers {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(220, 38, 38, 0.1);
     border: 1px solid var(--red-danger);
     border-radius: 6px;
 }
@@ -691,7 +698,7 @@ h3 {
 .estate-checklist {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(52, 199, 89, 0.1);
     border: 1px solid var(--green-safe);
     border-radius: 6px;
 }
@@ -719,7 +726,7 @@ h3 {
 
 .guardrails-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, rgba(19, 31, 56, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
 }
 
 .dashboard-grid {
@@ -785,7 +792,7 @@ h3 {
 }
 
 .zone.green {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(52, 199, 89, 0.2);
     color: var(--green-safe);
 }
 
@@ -795,13 +802,13 @@ h3 {
 }
 
 .zone.red {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(220, 38, 38, 0.2);
     color: var(--red-danger);
 }
 
 .dashboard-status {
     padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     border-radius: 4px;
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -840,7 +847,7 @@ h3 {
 }
 
 .failure-item {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     padding: 1.5rem;
     border-radius: 6px;
     border: 1px solid var(--border-color);
@@ -945,7 +952,7 @@ h3 {
 }
 
 .calc-disclaimer {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(220, 38, 38, 0.1);
     border: 1px solid var(--red-danger);
     border-radius: 6px;
     padding: 1rem;
@@ -967,7 +974,7 @@ h3 {
 }
 
 .calc-inputs, .calc-outputs {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     padding: 2rem;
     border-radius: 6px;
 }
@@ -982,7 +989,7 @@ h3 {
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(19, 31, 56, 0.3);
     overflow: hidden;
 }
 
@@ -992,7 +999,7 @@ h3 {
     justify-content: space-between;
     padding: 1rem 1.25rem;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(19, 31, 56, 0.5);
     border: none;
     width: 100%;
     text-align: left;
@@ -1000,7 +1007,7 @@ h3 {
 }
 
 .calc-section-header:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(27, 42, 74, 0.5);
 }
 
 .calc-section-header h4 {
@@ -1060,7 +1067,7 @@ h3 {
 .input-group textarea {
     width: 100%;
     padding: 0.75rem;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     color: #ffffff !important;
@@ -1079,7 +1086,7 @@ h3 {
 .input-group textarea:focus {
     outline: none;
     border-color: var(--gold-primary);
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 1);
 }
 
 .input-with-prefix {
@@ -1105,7 +1112,7 @@ h3 {
 .input-group input[type="range"] {
     width: 100%;
     height: 6px;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     outline: none;
 }
@@ -1173,7 +1180,7 @@ h3 {
 .toggle-switch label {
     display: block;
     padding: 0.75rem 1rem;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     cursor: pointer;
@@ -1181,12 +1188,12 @@ h3 {
 }
 
 .toggle-switch input[type="checkbox"]:checked + label {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(52, 199, 89, 0.2);
     border-color: var(--green-safe);
 }
 
 .toggle-switch input[type="checkbox"]:not(:checked) + label {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(220, 38, 38, 0.2);
     border-color: var(--red-danger);
 }
 
@@ -1248,7 +1255,7 @@ h3 {
 }
 
 .output-card {
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     padding: 1.5rem;
     border-radius: 6px;
     border: 1px solid var(--border-color);
@@ -1276,7 +1283,7 @@ h3 {
 }
 
 .output-status-badge.green {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(52, 199, 89, 0.2);
     color: var(--green-safe);
 }
 
@@ -1286,14 +1293,14 @@ h3 {
 }
 
 .output-status-badge.red {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(220, 38, 38, 0.2);
     color: var(--red-danger);
 }
 
 .output-chart {
     margin: 2rem 0;
     height: 400px;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     border-radius: 6px;
     padding: 1rem;
 }
@@ -1305,7 +1312,7 @@ h3 {
 }
 
 .output-table th {
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     padding: 0.75rem;
     text-align: left;
     color: var(--gold-primary);
@@ -1331,7 +1338,7 @@ h3 {
 }
 
 .stress-controls, .stress-results {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(16, 24, 43, 0.5);
     padding: 2rem;
     border-radius: 6px;
 }
@@ -1345,7 +1352,7 @@ h3 {
 
 .scenario-btn {
     padding: 1.25rem;
-    background: rgba(27, 42, 74, 0.06);
+    background: rgba(19, 31, 56, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     cursor: pointer;
@@ -1405,7 +1412,7 @@ h3 {
 
 .risks-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(19, 31, 56, 0.5) 100%);
 }
 
 .risks-grid {
@@ -1430,7 +1437,7 @@ h3 {
 .risk-icon {
     width: 70px;
     height: 70px;
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(220, 38, 38, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1457,7 +1464,7 @@ h3 {
 .risk-response {
     margin-top: 1.5rem;
     padding: 1.25rem;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(52, 199, 89, 0.1);
     border-left: 3px solid var(--green-safe);
     border-radius: 4px;
 }
@@ -1659,7 +1666,7 @@ h3 {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, rgba(200, 169, 81, 0.15) 0%, rgba(27, 42, 74, 0.06) 100%);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.15) 0%, rgba(19, 31, 56, 0.8) 100%);
     border: 2px solid var(--gold-primary);
     border-radius: 8px;
     cursor: pointer;
@@ -1668,7 +1675,7 @@ h3 {
 }
 
 .faq-category-header:hover {
-    background: linear-gradient(135deg, rgba(200, 169, 81, 0.25) 0%, rgba(27, 42, 74, 0.06) 100%);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.25) 0%, rgba(19, 31, 56, 0.9) 100%);
     transform: translateY(-2px);
 }
 
@@ -1773,7 +1780,7 @@ h3 {
 
 .qualify-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(180deg, rgba(19, 31, 56, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
 }
 
 .qualify-header {
@@ -1915,7 +1922,7 @@ h3 {
    =================================== */
 
 .footer {
-    background: #F3EFE9;
+    background: var(--navy-primary);
     border-top: 1px solid var(--border-color);
     padding: 4rem 0 2rem;
 }
@@ -2003,7 +2010,7 @@ h3 {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(20, 31, 56, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     overflow-y: auto;
 }
 
@@ -2015,7 +2022,7 @@ h3 {
 }
 
 .modal-content {
-    background: #ffffff;
+    background: var(--navy-primary);
     border-radius: 8px;
     max-width: 900px;
     width: 100%;
@@ -2025,7 +2032,7 @@ h3 {
 }
 
 .modal-header {
-    background: #F3EFE9;
+    background: var(--navy-light);
     padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -2092,7 +2099,7 @@ h3 {
 }
 
 .risk-summary {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(220, 38, 38, 0.1);
     border: 1px solid var(--red-danger);
     border-radius: 6px;
     padding: 1.5rem;
@@ -2115,7 +2122,7 @@ h3 {
 
 .tooltip-content {
     position: absolute;
-    background: #ffffff;
+    background: var(--navy-primary);
     border: 1px solid var(--gold-primary);
     border-radius: 6px;
     padding: 1rem;
@@ -2294,7 +2301,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-track {
-    background: #EDE8E1;
+    background: var(--navy-dark);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -2318,42 +2325,40 @@ html {
 }
 
 /* ===================================
-   BRAND LIGHT-THEME OVERRIDES
-   Ekantik Capital Advisors — Ivory / Navy / Gold
+   BRAND FOUNDATION OVERRIDES
+   Ekantik accelerator system — deep navy + disciplined gold
    (loaded last so it wins the cascade)
    =================================== */
 
-/* Display typography — Cormorant Garamond serif for all headings */
+/* Display serif on every heading (Playfair Display) */
 h1, h2, h3, h4, h5, h6,
-.section-title, .hero-title, .company-name.display {
-    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-    letter-spacing: 0.2px;
+.section-title, .hero-title, .h1, .h2, .h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.005em;
 }
-h1, h2, .hero-title, .section-title { font-weight: 600; }
+h1, .hero-title, .section-title { letter-spacing: -0.01em; }
 
-/* Sticky nav: solid-ish ivory with subtle depth (over transparent transform) */
-.sticky-nav {
-    background: rgba(250, 248, 245, 0.9);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 1px 0 rgba(27, 42, 74, 0.04);
+/* DM Mono for numerals / data (tabular figures) — the signature data voice */
+.stat-number, .stat__num, .big-number, .metric-value, .metric-number,
+[class*="stat-num"], [class*="-metric"], [class*="number-"], .price, .roi,
+table td, code, pre {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1;
+}
+/* keep prose table cells in body font; only numeric-looking cells use mono */
+table td { font-family: var(--font-body); }
+
+/* Gold accessibility focus ring (accelerator spec) */
+:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
-/* Crisp white cards on ivory — give them a hairline border + soft navy shadow */
-.card,
-.bullet-item,
-.modal-content,
-.tooltip-content,
-[class*="-card"],
-[class*="card-"] {
-    border-color: var(--border-color);
-}
-.modal-content { box-shadow: 0 24px 60px rgba(20, 31, 56, 0.22); }
-.tooltip-content { box-shadow: 0 12px 30px rgba(20, 31, 56, 0.18); }
+/* Signature gold hairline for horizontal rules */
+hr { border: 0; border-top: 1px solid var(--hairline-gold); }
 
-/* Soften the leftover gold glow shadows for a lighter surface */
+/* Soften the gold glow on primary CTA hover for the dark canvas */
 .cta-btn.primary:hover {
-    box-shadow: 0 8px 20px rgba(200, 169, 81, 0.35);
+    box-shadow: 0 8px 22px rgba(200, 169, 81, 0.28);
 }
-
-/* Keep the gold logo mark reading crisp on ivory */
-.logo-box { box-shadow: 0 2px 8px rgba(27, 42, 74, 0.12); }
