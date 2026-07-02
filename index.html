@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guardrailed Buy, Borrow & Die | Ekantik Capital Advisors</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="bbd/bbd.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -2001,6 +2002,18 @@
         </div>
     </section>
 
+    <!-- BBD Calculator Suite — falsifiability instruments (assumption-in → arithmetic-out) -->
+    <section id="calculators">
+        <div class="bbd-suite">
+            <div class="bbd-wrap" style="padding-top: clamp(3rem, 7vw, 5rem)">
+                <span class="bbd-kicker"><span class="bbd-kicker__glyph">◆</span> The product is the marketing</span>
+                <h2 class="bbd-h2" style="max-width: 26ch">Bring your own assumptions. We supply only the math.</h2>
+                <p class="bbd-question">Falsifiability instruments, not sales tools — every figure below is computed live from one shared engine and reproducible by your own CPA on a napkin. Move any assumption and every number updates. All values are DRAFT pending counsel sign-off.</p>
+            </div>
+            <main id="bbd-calcs"></main>
+        </div>
+    </section>
+
     <!-- De-Risking & Failure Modes Section -->
     <section class="risks-section" id="risks">
         <div class="container">
@@ -3390,5 +3403,9 @@
     </div>
 
     <script src="js/main.js"></script>
+
+    <!-- BBD Calculator Suite: constants → engine → widgets (assets under /bbd) -->
+    <script>window.BBD_BASE = "bbd/";</script>
+    <script src="bbd/boot.js"></script>
 </body>
 </html>

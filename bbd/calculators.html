@@ -58,14 +58,6 @@
 </div>
 
 <!-- one source of truth: constants → engine → format → motifs → compliance → widgets -->
-<script>window.BBD_CONSTANTS = null;</script>
-<script>
-  // Load constants synchronously-ish, then boot. (Static file; fetch is fine here —
-  // the ENGINE itself never fetches; this is page wiring only.)
-  fetch("bbd-constants.json").then(function (r) { return r.json(); }).then(function (C) {
-    window.BBD_CONSTANTS = C;
-    var s = document.createElement("script"); s.src = "boot.js"; document.body.appendChild(s);
-  });
-</script>
+<script src="boot.js"></script>
 </body>
 </html>
