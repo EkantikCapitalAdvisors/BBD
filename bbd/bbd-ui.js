@@ -31,7 +31,10 @@
     waitCagr: 0.12,                          // CALC-02
     waitHorizon: C0.horizons.curve,          // CALC-02
     delayMo: C0.horizons.waiting_delay_months, // CALC-02
-    mortality: C0.horizons.curve             // CALC-06 (20–40)
+    mortality: C0.horizons.curve,            // CALC-06 (20–40)
+    simTwoPhase: false,                      // CALC-04 : engine model
+    stressYear: 0,                           // CALC-04 : 0 = no shock
+    stressPct: -0.20                         // CALC-04 : drawdown magnitude
   };
 
   var subs = [];

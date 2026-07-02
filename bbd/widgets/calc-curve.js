@@ -16,33 +16,23 @@
     var out = UI.el("div", "bbd-readout"); s.panel.appendChild(out);
 
     var C0 = root.BBD_CONSTANTS, tp = C0.engine.two_phase;
-    // growth of $1 invested at start of year `k`, compounded to end of year `Y`
-    function grow(k, Y) {
-      var v = 1;
-      for (var y = k; y <= Y; y++) v *= (1 + (y <= tp.n1 ? tp.r1 : tp.r2));
-      return v;
-    }
-    function policyValue(Y) {
-      var prem = C0.premium.annual, v = 0;
-      for (var k = 1; k <= C0.premium.years && k <= Y; k++) v += prem * grow(k, Y);
-      return v;
-    }
 
     function compute() {
-      var st = UI.get(), Mo = st.mortality;
-      var loan = E.loanBalance(C0.premium.years);            // 4.0M, cleared at mortality
-      var netHeirs = policyValue(Mo) - loan;
+      var st = UI.get(), Mo = st.mortality, C = UI.constants();
+      // Same engine path the master simulator uses — two-phase, net of the
+      // wrapper fee — so the curve and CALC-04 can never disagree (§0.1).
+      var sim = E.simulate(st.gross, Mo, { twoPhase: true }, C);
+      var last = sim.rows[Mo - 1];
       s.hero.innerHTML =
-        'Five premiums, one curve, no interruptions: ≈ <span class="n">' + F.money(netHeirs) +
+        'Five premiums, one curve, no interruptions: ≈ <span class="n">' + F.money(sim.netHeirs) +
         '</span> to heirs at year <span class="n">' + Mo + '</span> — after the loan clears under §101(a).';
       out.innerHTML = "";
-      addNum(out, F.money(policyValue(Mo)), "Policy value @ mortality", "gold");
-      addNum(out, F.money(loan), "Loan cleared", "data");
-      addNum(out, F.money(netHeirs), "Net to heirs", "gold");
-      var series = [];
-      for (var y = 1; y <= Mo; y++) series.push({ x: y, y: policyValue(y) });
+      addNum(out, F.money(last.policyValue), "Policy value @ mortality", "gold");
+      addNum(out, F.money(last.loan), "Loan cleared", "data");
+      addNum(out, F.money(sim.netHeirs), "Net to heirs", "gold");
+      var series = sim.rows.map(function (r) { return { x: r.year, y: r.policyValue }; });
       UI.swap(s.figure, M.curve(series, {
-        w: 560, h: 280, phaseX: tp.n1, loanY: loan,
+        w: 560, h: 280, phaseX: tp.n1, loanY: last.loan,
         dots: [{ x: 5 }, { x: 10 }, { x: Mo, accent: true }]
       }));
     }

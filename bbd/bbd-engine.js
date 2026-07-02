@@ -169,6 +169,70 @@
   /** Financing adds above this gross return: loan rate + wrapper fee. */
   function breakevenLeverage(C) { var c = _c(C); return c.loan.rate + c.wrapper.fee_annual; }
 
+  // ---- CALC-04 & CALC-06 · full path (shared source of truth) --
+  /** Engine's GROSS return for year y: flat gross, or the two-phase schedule. */
+  function engineRate(y, gross, twoPhase, tp) {
+    return twoPhase ? (y <= tp.n1 ? tp.r1 : tp.r2) : gross;
+  }
+
+  /**
+   * Year-by-year deterministic simulation to horizon H (= mortality year).
+   * Policy value grows at engine return NET of the wrapper fee; premiums
+   * enter at the start of each funding year. Interest-only financing on the
+   * financed portion. opts:
+   *   { twoPhase:bool, stressYear:int, stressPct:number }   // stressPct e.g. -0.20
+   * Returns per-year rows plus net-to-heirs (loan cleared, §101(a)), the
+   * taxable A-equivalent, and the kill condition (spec §4 CALC-04).
+   *
+   * Identity that ties this to the golden vectors: a flat-gross run with no
+   * stress reproduces compareAllIn — rows[H-1].aEquiv === A, netHeirs === B.
+   */
+  function simulate(gross, H, opts, C) {
+    opts = opts || {};
+    var c = _c(C), tp = c.engine.two_phase;
+    var prem = c.premium.annual, yrs = c.premium.years;
+    var fee = c.wrapper.fee_annual, rate = c.loan.rate;
+    var oop = oopVector(H, C);
+    var rows = [], pv = 0, cumOop = 0;
+    for (var k = 1; k <= H; k++) {
+      var base = engineRate(k, gross, opts.twoPhase, tp);
+      var net = base - fee;
+      var premThis = k <= yrs ? prem : 0;
+      var shock = opts.stressYear === k ? (opts.stressPct || 0) : 0; // value drawdown
+      pv = (pv + premThis) * (1 + net) * (1 + shock);
+      var loan = loanBalance(k, C);
+      cumOop += oop[k - 1];
+      rows.push({
+        year: k,
+        policyValue: pv,
+        loan: loan,
+        ltv: pv > 0 ? loan / pv : 0,
+        carry: loan * rate,
+        cumOop: cumOop,
+        aEquiv: fvSchedule(oop.slice(0, k), netTaxable(gross, C), k),
+        spread: net - rate
+      });
+    }
+    var last = rows[H - 1];
+    var buffer = c.guardrails.stop_borrow_buffer;
+    var yield_ = (opts.twoPhase ? tp.r2 : gross) - fee; // ongoing (conservative) net engine yield
+    return {
+      rows: rows,
+      netHeirs: last.policyValue - last.loan,   // §101(a): loan cleared at mortality
+      A: last.aEquiv,
+      B: last.policyValue - last.loan,
+      kill: {
+        buffer: buffer,
+        killGross: buffer + rate + fee,          // gross at which spread hits the cushion
+        currentSpread: yield_ - rate,
+        stopBorrow: (yield_ - rate) < buffer,    // spread < cushion → stop borrowing
+        freezeDrawdown: c.guardrails.freeze_drawdown,
+        ltvHard: c.guardrails.ltv_hard,
+        ltvBreached: last.ltv >= c.guardrails.ltv_hard
+      }
+    };
+  }
+
   return {
     _constants: DEFAULTS,
     fv: fv,
@@ -184,6 +248,8 @@
     dragShare: dragShare,
     waitingCost: waitingCost,
     breakevenWrapper: breakevenWrapper,
-    breakevenLeverage: breakevenLeverage
+    breakevenLeverage: breakevenLeverage,
+    engineRate: engineRate,
+    simulate: simulate
   };
 });

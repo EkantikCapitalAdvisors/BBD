@@ -145,5 +145,25 @@
     return "M" + x0.toFixed(1) + " " + y0.toFixed(1) + " A" + r + " " + r + " 0 " + large + " 1 " + x1.toFixed(1) + " " + y1.toFixed(1);
   }
 
-  return { curve: curve, wedge: wedge, escalator: escalator, ladder: ladder, dial: dial };
+  // ---- CALC-04 · guardrail track (gold zone, red hard cap) ----
+  // opts: { ltv, target:[lo,hi], hard, max }
+  function guardrail(opts) {
+    var w = opts.w || 560, h = 78, padX = 12, trackY = 30, trackH = 14;
+    var max = opts.max || Math.max(opts.hard * 1.4, opts.ltv * 1.15, 0.5);
+    var sx = linScale(0, max, padX, w - padX);
+    var s = svg(w, h);
+    // full track
+    s.appendChild(node("rect", { x: padX, y: trackY, width: w - padX * 2, height: trackH, rx: 7, class: "bbd-bar-track" }));
+    // target band (gold zone)
+    s.appendChild(node("rect", { x: sx(opts.target[0]), y: trackY, width: sx(opts.target[1]) - sx(opts.target[0]), height: trackH, rx: 4, class: "bbd-gr-zone" }));
+    // hard cap (red)
+    s.appendChild(node("line", { x1: sx(opts.hard), y1: trackY - 6, x2: sx(opts.hard), y2: trackY + trackH + 6, class: "bbd-gr-cap" }));
+    s.appendChild(node("text", { x: sx(opts.hard), y: trackY - 10, class: "bbd-gr-caplabel", "text-anchor": "middle" })).textContent = "hard cap";
+    // current LTV marker
+    var breached = opts.ltv >= opts.hard;
+    s.appendChild(node("circle", { cx: sx(Math.min(opts.ltv, max)), cy: trackY + trackH / 2, r: 7, class: "bbd-gr-marker" + (breached ? " is-breached" : "") }));
+    return s;
+  }
+
+  return { curve: curve, wedge: wedge, escalator: escalator, ladder: ladder, dial: dial, guardrail: guardrail };
 });

@@ -129,6 +129,37 @@
 .bbd-dial .bbd-motif { width: 240px; max-width: 100%; }
 .bbd-dial .bbd-readout__num { display: block; margin-top: .25rem; }
 
+/* --- guardrail track (CALC-04) ------------------------------- */
+.bbd-gr-zone { fill: rgba(200,169,81,.30); }
+.bbd-gr-cap { stroke: var(--red); stroke-width: 2.5; }
+.bbd-gr-caplabel { fill: var(--red); font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em; }
+.bbd-gr-marker { fill: var(--gold-deep); stroke: var(--navy-950); stroke-width: 2; }
+.bbd-gr-marker.is-breached { fill: var(--red); }
+
+/* --- kill-condition banner (CALC-04, shows its own kill switch) */
+.bbd-kill {
+  border: 1px solid var(--hairline); border-left: 3px solid var(--gold);
+  border-radius: 10px; padding: 1rem 1.25rem; margin: 1.25rem 0;
+  background: rgba(200,169,81,.05);
+}
+.bbd-kill.is-fired { border-color: rgba(184,84,80,.5); border-left-color: var(--red); background: rgba(184,84,80,.08); }
+.bbd-kill__title { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.bbd-kill.is-fired .bbd-kill__title { color: var(--red); }
+.bbd-kill__body { margin-top: .4rem; color: var(--warm); font-size: .95rem; }
+.bbd-kill__body .n { font-family: var(--font-mono); color: var(--gold-deep); }
+.bbd-kill.is-fired .bbd-kill__body .n { color: var(--red); }
+
+/* --- simulator table ----------------------------------------- */
+.bbd-simtable-wrap { overflow-x: auto; margin-top: 1rem; max-height: 360px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+.bbd-simtable { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.bbd-simtable th, .bbd-simtable td { padding: .5rem .7rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.bbd-simtable th { position: sticky; top: 0; background: var(--navy-800); color: var(--muted); font-weight: 600; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.bbd-simtable td { font-family: var(--font-mono); color: var(--ivory); }
+.bbd-simtable td:first-child, .bbd-simtable th:first-child { text-align: left; color: var(--muted); }
+.bbd-simtable td.is-over { color: var(--red); }        /* LTV above the hard cap (honest ramp flag) */
+.bbd-simtable tr.is-shock { background: rgba(184,84,80,.10); }
+.bbd-simtable tr.is-fund td:first-child { color: var(--gold); }
+
 /* --- draw-on / grow animation (spec §7.2; once, ease-out) ---- */
 .bbd-draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; }
 .is-in .bbd-draw { animation: bbd-draw 600ms ease-out forwards; }

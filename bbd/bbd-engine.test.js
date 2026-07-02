@@ -108,6 +108,14 @@ ok("V10 breakeven wrapper", E.breakevenWrapper(), 0.02451);
 ok("V10 breakeven leverage", E.breakevenLeverage(), 0.0850);
 ok("V10 two-phase geo blend", E.twoPhaseBlend(), 0.1164);
 
+// ---- V11 · CALC-04 identity: flat simulate == compareAllIn ---
+// A flat-gross, no-stress simulation must reproduce the ladder's A and B,
+// tying the master simulator back to golden vectors V8.
+var sim = E.simulate(0.14, 20, {});
+ok("V11 sim A-equiv (=V8 A)", sim.A, 17.00e6);
+ok("V11 sim net-to-heirs (=V8 B)", sim.netHeirs, 41.80e6);
+ok("V11 kill gross (buffer+rate+fee)", sim.kill.killGross, 0.115);
+
 // ---- report --------------------------------------------------
 var w = [4, 24, 12, 12, 8];
 function pad(s, n) { s = String(s); return s + " ".repeat(Math.max(0, n - s.length)); }
