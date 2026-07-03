@@ -9,9 +9,10 @@
    (spec §7.3). Red appears only for breaks / caps / gaps (§7.1).
    ============================================================ */
 .bbd-suite {
-  --navy-950: #10182B;   /* canvas */
-  --navy-900: #131F38;   /* raised cards / panels */
-  --navy-800: #1B2A4A;   /* borders, header band */
+  /* Calculator instrument palette — build spec §7.3 (navy #1B2A4A bg) */
+  --navy-950: #1B2A4A;   /* canvas (§7.3) */
+  --navy-900: #22375C;   /* raised cards / panels (lighter → raised on canvas) */
+  --navy-800: #2C4068;   /* borders, header band */
   --gold:     #C8A951;   /* primary stroke, disciplined accent */
   --gold-deep:#D4AF37;   /* dots / emphasis */
   --gold-hover:#B08F3C;
@@ -22,9 +23,9 @@
   --teal:     #0D9488;   /* neutral data */
   --hairline: rgba(200,169,81,.30);
   --border:   rgba(233,231,226,.14);
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:    'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   background: var(--navy-950);
   color: var(--ivory);

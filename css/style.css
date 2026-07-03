@@ -1,10 +1,10 @@
 /* ===================================
    EKANTIK CAPITAL ADVISORS
    Guardrailed Buy, Borrow & Die
-   Brand foundation (accelerator.ekantikcapital.com):
-   Deep-navy institutional canvas · disciplined gold accent.
+   Brand system — calculators spec §7.3 (accelerator family):
+   Navy #1B2A4A canvas · ivory text · disciplined gold accent.
    Navy #10182B/#131F38/#1B2A4A · Gold #C8A951 · Ivory #FAF8F5 relief.
-   Display: Playfair Display · Body: DM Sans · Data: DM Mono.
+   Display: Cormorant Garamond · Body: DM Sans · Data: JetBrains Mono.
    Gold discipline: emphasis / primary CTA / key numerals only.
    =================================== */
 
@@ -16,36 +16,38 @@
 }
 
 :root {
-    /* Navy scale — the canvas */
-    --navy-dark: #10182B;      /* navy-950: deepest background */
-    --navy-primary: #131F38;   /* navy-900: raised panels/cards on dark */
-    --navy-light: #1B2A4A;     /* navy-800: brand navy, borders, headers */
+    /* Navy scale — build spec §7.3 canvas (Navy #1B2A4A bg) */
+    --navy-dark: #1B2A4A;      /* canvas / background, text-on-gold */
+    --navy-primary: #22375C;   /* raised panels/cards (lighter → raised) */
+    --navy-light: #2C4068;     /* borders, header bands */
     /* Signature gold — accent only */
     --gold-primary: #C8A951;
     --gold-hover: #B08F3C;
     --gold-light: #D9C179;
     --gold-600: #B08F3C;
-    /* Text on the dark canvas */
-    --text-light: #E9E7E2;                     /* body on navy (warm off-white) */
-    --text-muted: rgba(233, 231, 226, 0.62);   /* muted / captions */
-    --text-dark: #1B2A4A;                       /* text on light relief sections */
+    --gold-deep: #D4AF37;      /* dots / emphasis (§7.3) */
+    /* Text on the navy canvas */
+    --text-light: #FAF8F5;                     /* ivory body text (§7.3) */
+    --text-muted: #9A9485;                     /* muted / captions (§7.3) */
+    --text-warm: #D8D4CA;                      /* secondary text (§7.3) */
+    --text-dark: #1B2A4A;                       /* text on light chips/gold */
     /* Semantic layer */
     --green-safe: #34C759;     /* live / positive */
     --green-success: #34C759;
     --color-data: #0D9488;     /* teal — neutral data */
     --amber-caution: #D9A441;
-    --red-danger: #DC2626;     /* kill / gate / danger only */
+    --red-danger: #B85450;     /* breaks / caps / gaps only (§7.3) */
     /* Surfaces & lines */
     --ivory: #FAF8F5;
-    --body-bg: #10182B;
+    --body-bg: #1B2A4A;
     --border-color: rgba(233, 231, 226, 0.14);
     --hairline-gold: rgba(200, 169, 81, 0.30);
-    --card-bg: rgba(19, 31, 56, 0.72);
-    --card-hover: rgba(27, 42, 74, 0.85);
-    /* Type roles */
-    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --card-bg: #22375C;
+    --card-hover: #2C4068;
+    /* Type roles — §7.3 */
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 body {
@@ -471,7 +473,7 @@ h3 {
 
 .problem-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(19, 31, 56, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(34, 55, 92, 0.5) 100%);
 }
 
 .problem-grid {
@@ -726,7 +728,7 @@ h3 {
 
 .guardrails-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(19, 31, 56, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
+    background: linear-gradient(180deg, rgba(34, 55, 92, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
 }
 
 .dashboard-grid {
@@ -989,7 +991,7 @@ h3 {
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    background: rgba(19, 31, 56, 0.3);
+    background: rgba(34, 55, 92, 0.3);
     overflow: hidden;
 }
 
@@ -999,7 +1001,7 @@ h3 {
     justify-content: space-between;
     padding: 1rem 1.25rem;
     cursor: pointer;
-    background: rgba(19, 31, 56, 0.5);
+    background: rgba(34, 55, 92, 0.5);
     border: none;
     width: 100%;
     text-align: left;
@@ -1007,7 +1009,7 @@ h3 {
 }
 
 .calc-section-header:hover {
-    background: rgba(27, 42, 74, 0.5);
+    background: rgba(43, 62, 100, 0.5);
 }
 
 .calc-section-header h4 {
@@ -1067,7 +1069,7 @@ h3 {
 .input-group textarea {
     width: 100%;
     padding: 0.75rem;
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     color: #ffffff !important;
@@ -1086,7 +1088,7 @@ h3 {
 .input-group textarea:focus {
     outline: none;
     border-color: var(--gold-primary);
-    background: rgba(19, 31, 56, 1);
+    background: rgba(34, 55, 92, 1);
 }
 
 .input-with-prefix {
@@ -1180,7 +1182,7 @@ h3 {
 .toggle-switch label {
     display: block;
     padding: 0.75rem 1rem;
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 4px;
     cursor: pointer;
@@ -1255,7 +1257,7 @@ h3 {
 }
 
 .output-card {
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     padding: 1.5rem;
     border-radius: 6px;
     border: 1px solid var(--border-color);
@@ -1300,7 +1302,7 @@ h3 {
 .output-chart {
     margin: 2rem 0;
     height: 400px;
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     border-radius: 6px;
     padding: 1rem;
 }
@@ -1312,7 +1314,7 @@ h3 {
 }
 
 .output-table th {
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     padding: 0.75rem;
     text-align: left;
     color: var(--gold-primary);
@@ -1352,7 +1354,7 @@ h3 {
 
 .scenario-btn {
     padding: 1.25rem;
-    background: rgba(19, 31, 56, 0.8);
+    background: rgba(34, 55, 92, 0.8);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     cursor: pointer;
@@ -1412,7 +1414,7 @@ h3 {
 
 .risks-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(19, 31, 56, 0.5) 100%);
+    background: linear-gradient(180deg, rgba(16, 24, 43, 0) 0%, rgba(34, 55, 92, 0.5) 100%);
 }
 
 .risks-grid {
@@ -1666,7 +1668,7 @@ h3 {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, rgba(200, 169, 81, 0.15) 0%, rgba(19, 31, 56, 0.8) 100%);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.15) 0%, rgba(34, 55, 92, 0.8) 100%);
     border: 2px solid var(--gold-primary);
     border-radius: 8px;
     cursor: pointer;
@@ -1675,7 +1677,7 @@ h3 {
 }
 
 .faq-category-header:hover {
-    background: linear-gradient(135deg, rgba(200, 169, 81, 0.25) 0%, rgba(19, 31, 56, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.25) 0%, rgba(34, 55, 92, 0.9) 100%);
     transform: translateY(-2px);
 }
 
@@ -1780,7 +1782,7 @@ h3 {
 
 .qualify-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, rgba(19, 31, 56, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
+    background: linear-gradient(180deg, rgba(34, 55, 92, 0.5) 0%, rgba(16, 24, 43, 0) 100%);
 }
 
 .qualify-header {
