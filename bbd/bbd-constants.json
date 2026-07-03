@@ -1,0 +1,14 @@
+{
+  "_status": "DRAFT — pending §9 sign-off; every value replaceable per client case",
+  "tax":     { "st_all_in": 0.408, "note": "37% top bracket + 3.8% NIIT; state tax user-added" },
+  "wrapper": { "fee_annual": 0.010, "note": "M&E + admin + IDF, institutional-size assumption" },
+  "loan":    { "rate": 0.075, "ltv_financed": 0.80, "origination": 0.010,
+               "structure": "interest-only, paid current from unlevered cash" },
+  "engine":  { "gross_default": 0.14, "gross_alt": 0.23,
+               "two_phase": { "r1": 0.15, "n1": 10, "r2": 0.10, "n2": 20, "blend_geo": 0.1164 } },
+  "premium": { "annual": 1000000, "years": 5 },
+  "horizons":{ "default": 20, "curve": 30, "waiting_delay_months": 24 },
+  "guardrails": { "ltv_target": [0.25, 0.35], "ltv_hard": 0.35,
+                  "spread_cushion_bp": [200, 300], "stop_borrow_buffer": 0.03,
+                  "freeze_drawdown": -0.20 }
+}

@@ -1,0 +1,183 @@
+/* ============================================================
+   BBD CALCULATOR SUITE — bbd.css
+   Visual foundation (accelerator.ekantikcapital.com system) +
+   widget/motif components. Scoped under .bbd-suite so it is
+   portable and never collides with the host page.
+
+   Tokens: deep-navy institutional canvas · disciplined gold.
+   Numbers render in DM Mono — "mono = computed, never asserted"
+   (spec §7.3). Red appears only for breaks / caps / gaps (§7.1).
+   ============================================================ */
+.bbd-suite {
+  /* Calculator instrument palette — build spec §7.3 (navy #1B2A4A bg) */
+  --navy-950: #1B2A4A;   /* canvas (§7.3) */
+  --navy-900: #22375C;   /* raised cards / panels (lighter → raised on canvas) */
+  --navy-800: #2C4068;   /* borders, header band */
+  --gold:     #C8A951;   /* primary stroke, disciplined accent */
+  --gold-deep:#D4AF37;   /* dots / emphasis */
+  --gold-hover:#B08F3C;
+  --ivory:    #FAF8F5;   /* text */
+  --warm:     #D8D4CA;   /* secondary text / lost curve */
+  --muted:    #9A9485;   /* axes, labels, captions */
+  --red:      #B85450;   /* breaks, hard caps, gaps ONLY */
+  --teal:     #0D9488;   /* neutral data */
+  --hairline: rgba(200,169,81,.30);
+  --border:   rgba(233,231,226,.14);
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  background: var(--navy-950);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+.bbd-suite *, .bbd-suite *::before, .bbd-suite *::after { box-sizing: border-box; }
+.bbd-wrap { width: min(100% - 2.5rem, 1120px); margin-inline: auto; }
+
+/* --- section rhythm ------------------------------------------ */
+.bbd-widget { padding-block: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--hairline); }
+.bbd-widget:first-of-type { border-top: 0; }
+
+/* --- kicker / eyebrow ---------------------------------------- */
+.bbd-kicker {
+  font-size: .8125rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--muted); display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1rem;
+}
+.bbd-kicker__num { font-family: var(--font-mono); color: var(--gold); letter-spacing: 0; }
+.bbd-kicker__glyph { color: var(--gold); }
+
+/* --- headings ------------------------------------------------ */
+.bbd-h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.1; letter-spacing: -.005em; }
+.bbd-h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; }
+.bbd-question { color: var(--warm); max-width: 62ch; margin-top: .35rem; }
+.bbd-h2 em { font-style: italic; color: var(--gold); }
+
+/* --- hero line (values injected from the engine) ------------- */
+.bbd-hero {
+  font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  line-height: 1.35; margin: 1.5rem 0 .75rem; max-width: 40ch;
+}
+.bbd-hero .n { font-family: var(--font-mono); color: var(--gold-deep); font-style: normal; white-space: nowrap; }
+.bbd-hero .n--data { color: var(--teal); }
+.bbd-hero .n--loss { color: var(--red); }
+
+/* --- compliance chip (≥60% of hero size, §8.1) --------------- */
+.bbd-chip {
+  display: inline-block; font-family: var(--font-mono); font-size: clamp(.85rem, 1.5vw, 1.15rem);
+  letter-spacing: .06em; color: var(--gold); border: 1px solid var(--hairline);
+  border-radius: 999px; padding: .3rem .8rem; margin-bottom: .5rem;
+}
+
+/* --- disclosure block (adjacent, never below the fold) ------- */
+.bbd-disclosure { margin-top: 1.5rem; border-left: 2px solid var(--hairline); padding-left: 1rem; }
+.bbd-disclosure ul { list-style: none; margin: 0; padding: 0; }
+.bbd-disclosure li { font-size: .8125rem; line-height: 1.55; color: var(--muted); margin-bottom: .4rem; }
+
+/* --- layout: figure + panel ---------------------------------- */
+.bbd-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: start; margin-top: 1.5rem; }
+@media (max-width: 820px) { .bbd-grid { grid-template-columns: 1fr; } }
+.bbd-panel { background: var(--navy-900); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; }
+
+/* --- controls (the shared assumption drawer) ----------------- */
+.bbd-ctrl { display: block; margin-bottom: 1.1rem; }
+.bbd-ctrl__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .35rem; }
+.bbd-ctrl__label { font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.bbd-ctrl__val { font-family: var(--font-mono); color: var(--ivory); font-size: 1rem; }
+.bbd-ctrl__note { display: block; margin-top: .3rem; font-size: .72rem; color: var(--muted); font-style: italic; }
+.bbd-ctrl__range { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; background: var(--border); border-radius: 3px; outline: none; }
+.bbd-ctrl__range::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; border: 2px solid var(--navy-950); }
+.bbd-ctrl__range::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; border: 2px solid var(--navy-950); }
+.bbd-ctrl__range:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+/* --- segmented toggle ---------------------------------------- */
+.bbd-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+.bbd-toggle__btn { font-family: var(--font-body); font-size: .8rem; letter-spacing: .04em; padding: .45rem .9rem; background: transparent; color: var(--muted); border: 0; cursor: pointer; }
+.bbd-toggle__btn[aria-pressed="true"] { background: var(--gold); color: var(--navy-950); font-weight: 600; }
+
+/* --- readouts ------------------------------------------------ */
+.bbd-readout { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+.bbd-readout__num { font-family: var(--font-mono); font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1; font-feature-settings: "tnum" 1; letter-spacing: -.01em; }
+.bbd-readout__num.tone-gold { color: var(--gold-deep); }
+.bbd-readout__num.tone-loss { color: var(--red); }
+.bbd-readout__num.tone-data { color: var(--teal); }
+.bbd-readout__label { display: block; margin-top: .4rem; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* --- motifs -------------------------------------------------- */
+.bbd-motif { width: 100%; height: auto; display: block; }
+.bbd-axis { stroke: var(--muted); stroke-width: 1; opacity: .5; }
+.bbd-divider { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .5; }
+.bbd-loan { stroke: var(--teal); stroke-width: 1.5; stroke-dasharray: 2 4; opacity: .8; }
+.bbd-curve { fill: none; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.bbd-curve.is-lost { stroke: var(--warm); stroke-dasharray: 5 5; opacity: .8; }  /* "the curve you lose" */
+.bbd-dot { fill: var(--gold-deep); stroke: var(--navy-950); stroke-width: 2; }
+.bbd-dot.is-accent { fill: var(--red); }
+.bbd-bracket { stroke: var(--red); stroke-width: 3; }
+.bbd-bar-track { fill: var(--border); }
+.bbd-bar { fill: var(--navy-800); }
+.bbd-bar.tone-structure { fill: var(--gold); }
+.bbd-bar.tone-leverage { fill: var(--gold-deep); }
+.bbd-gauge-track { fill: none; stroke: var(--border); stroke-width: 10; stroke-linecap: round; }
+.bbd-gauge-live { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; }
+.bbd-gauge-mark { stroke: var(--ivory); stroke-width: 2; }
+.bbd-needle { stroke: var(--red); stroke-width: 2.5; stroke-linecap: round; }
+.bbd-needle-hub { fill: var(--red); }
+.bbd-delta { font-family: var(--font-mono); font-size: .8rem; fill: var(--ivory); }
+
+/* --- dials (CALC-05) ----------------------------------------- */
+.bbd-dials { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+.bbd-dial { text-align: center; }
+.bbd-dial .bbd-motif { width: 240px; max-width: 100%; }
+.bbd-dial .bbd-readout__num { display: block; margin-top: .25rem; }
+
+/* --- guardrail track (CALC-04) ------------------------------- */
+.bbd-gr-zone { fill: rgba(200,169,81,.30); }
+.bbd-gr-cap { stroke: var(--red); stroke-width: 2.5; }
+.bbd-gr-caplabel { fill: var(--red); font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em; }
+.bbd-gr-marker { fill: var(--gold-deep); stroke: var(--navy-950); stroke-width: 2; }
+.bbd-gr-marker.is-breached { fill: var(--red); }
+
+/* --- kill-condition banner (CALC-04, shows its own kill switch) */
+.bbd-kill {
+  border: 1px solid var(--hairline); border-left: 3px solid var(--gold);
+  border-radius: 10px; padding: 1rem 1.25rem; margin: 1.25rem 0;
+  background: rgba(200,169,81,.05);
+}
+.bbd-kill.is-fired { border-color: rgba(184,84,80,.5); border-left-color: var(--red); background: rgba(184,84,80,.08); }
+.bbd-kill__title { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.bbd-kill.is-fired .bbd-kill__title { color: var(--red); }
+.bbd-kill__body { margin-top: .4rem; color: var(--warm); font-size: .95rem; }
+.bbd-kill__body .n { font-family: var(--font-mono); color: var(--gold-deep); }
+.bbd-kill.is-fired .bbd-kill__body .n { color: var(--red); }
+
+/* --- simulator table ----------------------------------------- */
+.bbd-simtable-wrap { overflow-x: auto; margin-top: 1rem; max-height: 360px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+.bbd-simtable { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.bbd-simtable th, .bbd-simtable td { padding: .5rem .7rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.bbd-simtable th { position: sticky; top: 0; background: var(--navy-800); color: var(--muted); font-weight: 600; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.bbd-simtable td { font-family: var(--font-mono); color: var(--ivory); }
+.bbd-simtable td:first-child, .bbd-simtable th:first-child { text-align: left; color: var(--muted); }
+.bbd-simtable td.is-over { color: var(--red); }        /* LTV above the hard cap (honest ramp flag) */
+.bbd-simtable tr.is-shock { background: rgba(184,84,80,.10); }
+.bbd-simtable tr.is-fund td:first-child { color: var(--gold); }
+
+/* --- draw-on / grow animation (spec §7.2; once, ease-out) ---- */
+.bbd-draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; }
+.is-in .bbd-draw { animation: bbd-draw 600ms ease-out forwards; }
+@keyframes bbd-draw { to { stroke-dashoffset: 0; } }
+.bbd-grow { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+.is-in .bbd-grow { animation: bbd-grow 600ms ease-out forwards; }
+@keyframes bbd-grow { to { transform: scaleX(1); } }
+
+/* --- DRAFT watermark until §9 sign-off (spec §8.4) ----------- */
+.bbd-widget.is-draft .bbd-panel { position: relative; }
+.bbd-widget.is-draft .bbd-panel::after {
+  content: "DRAFT"; position: absolute; top: .6rem; right: .8rem;
+  font-family: var(--font-mono); font-size: .7rem; letter-spacing: .25em;
+  color: var(--gold); opacity: .35; pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bbd-suite .bbd-draw { stroke-dashoffset: 0; animation: none; }
+  .bbd-suite .bbd-grow { transform: none; animation: none; }
+}
