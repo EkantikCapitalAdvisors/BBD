@@ -36,9 +36,9 @@
       addNum(out, F.money(r.leveragePremium), "Leverage premium (Δ2)", "gold");
       addNum(out, F.mult(r.multiple), "B ÷ A");
       UI.swap(s.figure, M.ladder([
-        { label: "Taxable", value: r.A },
-        { label: "Structured", value: r.rung2, tone: "structure" },
-        { label: "Structured + financed", value: r.B, tone: "leverage" }
+        { label: "Taxable (A)", value: r.A, valueText: F.money(r.A) },
+        { label: "Structured (B unlevered)", value: r.rung2, tone: "structure", valueText: F.money(r.rung2) },
+        { label: "Structured + financed (B)", value: r.B, tone: "leverage", valueText: F.money(r.B) }
       ], { w: 560, h: 240 }));
     }
     UI.subscribe(compute); compute();

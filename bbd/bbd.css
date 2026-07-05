@@ -117,6 +117,10 @@
 .bbd-bar { fill: var(--navy-800); }
 .bbd-bar.tone-structure { fill: var(--gold); }
 .bbd-bar.tone-leverage { fill: var(--gold-deep); }
+.bbd-bar-label { font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; fill: var(--ivory); }
+.bbd-bar-label.on-gold { fill: var(--navy-950); }
+.bbd-bar-value { font-family: var(--font-mono); font-size: 13px; fill: var(--ivory); }
+.bbd-bar-value.on-gold { fill: var(--navy-950); }
 .bbd-gauge-track { fill: none; stroke: var(--border); stroke-width: 10; stroke-linecap: round; }
 .bbd-gauge-live { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; }
 .bbd-gauge-mark { stroke: var(--ivory); stroke-width: 2; }
