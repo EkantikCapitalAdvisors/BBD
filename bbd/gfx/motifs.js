@@ -99,19 +99,36 @@
   }
 
   // ---- CALC-03 · three-rung ladder ----------------------------
-  // rungs:[{label,value,tone}] ; deltas rendered by the widget as text
+  // rungs:[{label,value,tone,valueText}] — each bar carries its name + value
   function ladder(rungs, opts) {
     opts = opts || {}; var w = opts.w || 640, h = opts.h || 260, pad = 8;
     var maxV = Math.max.apply(0, rungs.map(function (r) { return r.value; }));
-    var barH = 46, gap = (h - rungs.length * barH) / (rungs.length + 1);
+    var barH = 48, gap = (h - rungs.length * barH) / (rungs.length + 1);
     var sw = linScale(0, maxV, 0, w - pad * 2);
     var s = svg(w, h);
     rungs.forEach(function (r, i) {
-      var y = gap + i * (barH + gap);
-      s.appendChild(node("rect", { x: pad, y: y, width: 1, height: barH, rx: 3, class: "bbd-bar-track" }));
-      var bar = node("rect", { x: pad, y: y, width: Math.max(2, sw(r.value)), height: barH, rx: 3, class: "bbd-bar" + (r.tone ? " tone-" + r.tone : "") });
+      var y = gap + i * (barH + gap), cy = y + barH / 2;
+      var bw = Math.max(2, sw(r.value));
+      var onGold = !!r.tone;                 // gold bars → navy text; navy bar → ivory text
+      s.appendChild(node("rect", { x: pad, y: y, width: w - pad * 2, height: barH, rx: 4, class: "bbd-bar-track" }));
+      var bar = node("rect", { x: pad, y: y, width: bw, height: barH, rx: 4, class: "bbd-bar" + (r.tone ? " tone-" + r.tone : "") });
       bar.classList.add("bbd-grow");
       s.appendChild(bar);
+      // label, inside the bar at the left
+      var lbl = node("text", { x: pad + 14, y: cy, class: "bbd-bar-label" + (onGold ? " on-gold" : ""), "dominant-baseline": "central" });
+      lbl.textContent = r.label;
+      s.appendChild(lbl);
+      // value, inside the bar at the right (falls just outside if the bar is short)
+      if (r.valueText != null) {
+        var inside = bw > 150;
+        var val = node("text", {
+          x: inside ? pad + bw - 14 : pad + bw + 10, y: cy,
+          class: "bbd-bar-value" + (inside && onGold ? " on-gold" : ""),
+          "text-anchor": inside ? "end" : "start", "dominant-baseline": "central"
+        });
+        val.textContent = r.valueText;
+        s.appendChild(val);
+      }
     });
     return s;
   }
